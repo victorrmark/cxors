@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## CXORS
 
-## Getting Started
+### Description
 
-First, run the development server:
+Welcome to cxors project! Scissor is a simple tool that makes URLs as short as possible. This app was built using TypeScript, Next.js, Supabase for the backend, and Chakra UI for the frontend. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Cxors allows users to shorten long URLs, 
+- Users can choose their custom domain name and customize the URL to reflect their brand or content. 
+- Cxors also allows users to generate QR codes for the shortened URLs. 
+- Users can download and use the QR code image.
+- Cxors provides basic analytics that allows users to track the performance of their shortened URLs. Users can see how many clicks their shortened URL has received and where the clicks are coming from. 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Contributing
+We welcome any and all contributions! Here are some ways you can get started:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Report bugs: If you encounter any bugs, please let us know. Open up an issue and let us know the problem.
+- Contribute code: Fork and clone the repo, add your contributions (code or documentation), commit and push, wait for pull request to be merged.
+- Suggestions: If you don't want to code but have some awesome ideas, open up an issue explaining some updates or imporvements you would like to see!
+- Documentation: If you see the need for some additional documentation, feel free to add some!

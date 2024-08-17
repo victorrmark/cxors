@@ -222,7 +222,7 @@ export default function UrlShortener() {
 
                 <Box>
                   <Text fontSize="xl" fontWeight="bold">
-                    Share your new link
+                    Share your cxorsed link
                   </Text>
                   <Flex flexWrap="wrap" p={4} gap={4} mt={2}>
                     <div>

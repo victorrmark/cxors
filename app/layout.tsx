@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Head from 'next/head';
+// import Head from 'next/head';
 import { Providers } from "./providers";
 import { Poppins } from "next/font/google";
 import "./globals.css";
@@ -13,9 +13,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "cxors",
   description: "URL shortening app",
-  icons: {
-    icon: '/favicon.ico',
-  },
+  // icons: {
+  //   icon: '/favicon.ico',
+  // },
 };
 
 export default function RootLayout({
@@ -25,9 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
+      {/* <Head>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
       <body className={poppins.className}>
         <Providers>
           <UserProvider>{children}</UserProvider>

@@ -51,7 +51,7 @@ const SignupPage = () => {
 
     const response = await signup(formData);
 
-    if (response.error) {
+    if (response?.error) {
       if (response.error.includes("rate limit")) {
         setError("Too many requests. Please try again later.");
       } else {
@@ -170,7 +170,7 @@ const SignupPage = () => {
               mt={4}
               isDisabled={isSubmitting || password.length < 6}
               isLoading={isSubmitting}
-              loadingText="Signing in..."
+              loadingText="Creating account..."
             >
               Signup
             </Button>

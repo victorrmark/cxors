@@ -31,8 +31,21 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser()
+  
+
 
   const publicRoutes = ['/', '/login', '/signup']
+
+  if (publicRoutes.includes(request.nextUrl.pathname)) {
+    return supabaseResponse;
+  }
+
+  if (!user) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/login';
+    console.log('Redirecting to /login');
+    return NextResponse.redirect(url);
+  }
 
   if (user && request.nextUrl.pathname === '/') {
     const url = request.nextUrl.clone();
@@ -40,16 +53,25 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (
-    !user &&
-    !publicRoutes.includes(request.nextUrl.pathname) &&
-    // !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/auth')
-  ) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
-  }
+  // if (
+  //   !user &&
+  //   !publicRoutes.includes(request.nextUrl.pathname) &&
+  //   // !request.nextUrl.pathname.startsWith('/login') &&
+  //   !request.nextUrl.pathname.startsWith('/auth')
+  // ) {
+  //   const url = request.nextUrl.clone()
+  //   url.pathname = '/login'
+  //   return NextResponse.redirect(url)
+  // }
+
+  // if (!publicRoutes.includes(request.nextUrl.pathname)) {
+  //   if (!user) {
+  //     const url = request.nextUrl.clone()
+  //     url.pathname = '/login'
+  //     console.log('Redirecting to /login');
+  //     return NextResponse.redirect(url)
+  //   }
+  // }
 
   return supabaseResponse
 }

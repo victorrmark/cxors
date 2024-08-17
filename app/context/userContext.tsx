@@ -21,9 +21,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) {
         setUser(data.user);
-      } else {
-        router.push('/login');
-      }
+      } 
+      // else {
+      //   router.push('/login');
+      // }
     });
   }, [router]);
 
