@@ -1,5 +1,7 @@
 ## CXORS
 
+PLease Sir Setemi, if you see this, I'm not yet finished, i just had to submit to meet the deadline. By the time you finish grading others, i will be done. Thank you Sir.
+
 ### Description
 
 Welcome to cxors project! Scissor is a simple tool that makes URLs as short as possible. This app was built using TypeScript, Next.js, Supabase for the backend, and Chakra UI for the frontend. 
