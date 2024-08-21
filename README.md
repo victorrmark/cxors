@@ -1,6 +1,4 @@
-## CXORS
-
-PLease Sir Setemi, if you see this, I'm not yet finished, i just had to submit to meet the deadline. By the time you finish grading others, i will be done. Thank you Sir.
+## CXORS - (A URL Shortening App)
 
 ### Description
 

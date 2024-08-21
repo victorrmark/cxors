@@ -33,17 +33,18 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
   
 
-
   const publicRoutes = ['/', '/login', '/signup']
 
-  if (publicRoutes.includes(request.nextUrl.pathname)) {
+  // if (publicRoutes.includes(request.nextUrl.pathname)) {
+  //   return supabaseResponse;
+  // }
+  if (publicRoutes.includes(request.nextUrl.pathname) || request.nextUrl.pathname.startsWith('/shortPath')) {
     return supabaseResponse;
   }
 
   if (!user) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
-    console.log('Redirecting to /login');
     return NextResponse.redirect(url);
   }
 

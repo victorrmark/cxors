@@ -25,7 +25,6 @@ export default function UserDropdown({ email }: UserDropdownProps) {
   const handleLogout = () => {
     startTransition(async () => {
       await logout();
-      // The redirect will happen automatically after the logout
     });
   };
 

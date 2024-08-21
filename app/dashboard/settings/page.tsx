@@ -1,5 +1,13 @@
-const Settings = () =>{
-    return <h1>This is settings page</h1>
-}
+import { Text } from '@chakra-ui/react'
 
-export default Settings
+
+const UpdateUserForm = () => {
+
+  return (
+    <div style={{padding: "20px"}}>
+        <Text fontSize='3xl' fontWeight='bold' mb={10}>Settings</Text>
+    </div>
+  );
+};
+
+export default UpdateUserForm;

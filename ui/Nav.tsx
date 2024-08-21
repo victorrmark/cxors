@@ -37,7 +37,7 @@ const Navbar = () => {
     >
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <Flex alignItems="center">
-          <Image src={logo} alt="Logo" width={100} height={100} />
+          <Image src={logo} alt="Logo" width={100} style={{ height: 'auto' }}  />
         </Flex>
 
         <Spacer />

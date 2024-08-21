@@ -21,11 +21,14 @@ export default function Header({ onOpenSidebar }: HeaderProps) {
     <Flex
       as="header"
       align="center"
-      justify="space-between"
+      justify="space-evenly"
       p={4}
       bg="white"
       borderBottom="1px solid"
       borderColor="gray.200"
+      position="fixed"
+      width="100%"
+      zIndex={1}
     >
       <IconButton
         size="md"
@@ -35,21 +38,21 @@ export default function Header({ onOpenSidebar }: HeaderProps) {
         onClick={onOpenSidebar}
       />
       <Box as="span" display={{ base: "none", md: "block" }}>
-        <Box display="flex" justifyContent="center" gap={1}>
+        <Box display="flex"  gap={1}>
           {greetings === "Good Morning," && <p>⛅</p>}
           {greetings === "Good Afternoon," && <p>☀️</p>}
           {greetings === "Good Evening," && <p>🌇</p>}
 
-          <Box>
+          <Box >
             <Text fontWeight="bold">
               {greetings} {userName}
             </Text>
-            <Text>{date()}</Text>
+            <Text textAlign="center">{date()}</Text>
           </Box>
         </Box>
       </Box>
       <Box as="span" display={{ base: "block", md: "none" }}>
-        <Image src={logo} alt="Logo" width={100} height={100} />
+        <Image src={logo} alt="Logo" width={80} style={{ height: 'auto' }} />
       </Box>
       <UserDropdown email={userEmail} />
     </Flex>

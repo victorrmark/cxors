@@ -50,7 +50,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       >
         <Flex direction="column" h="100%" /*justifyContent="space-between"*/>
           <Box p={7} bg="white" borderBottom="1px solid" borderColor="gray.200" >
-            <Image src={logo} alt="Logo" width={100} height={100} />
+            <Image src={logo} alt="Logo" width={100} style={{ height: 'auto' }} />
           </Box>
           <Box>
             <VStack spacing={4} alignItems="start" p={4}>
