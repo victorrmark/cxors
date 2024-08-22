@@ -120,7 +120,7 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
 
   if (loading)
     return (
-      <div style={{position:"relative", top:"60px"}}>
+      <div>
         <Button
           variant="ghost"
           onClick={() => router.push("/dashboard/links")}
@@ -130,13 +130,17 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
           {" "}
           Go back
         </Button>
-        <Skeleton height="500px" />
+        <Stack gap="15px">
+          <Skeleton height="120px" />
+          <Skeleton height="120px" />
+          <Skeleton height="120px" />
+        </Stack>
       </div>
     );
 
   if (error)
     return (
-      <div style={{position:"relative", top:"60px"}}>
+      <div>
         <Button
           variant="ghost"
           onClick={() => router.push("/dashboard/links")}
@@ -146,7 +150,7 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
           {" "}
           Go back
         </Button>
-        <Text fontSize="2xl" fontWeight="bold" textAlign="center">
+        <Text fontSize="xl" textAlign="center" color="gray.500">
           Check you Internet connection and{" "}
           <a href="#" onClick={handleReload} className="reload">
             reload the page
@@ -156,11 +160,7 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
     );
 
   return (
-    <div
-      style={{
-        padding: "20px",
-      }}
-    >
+    <div>
       <Button
         variant="ghost"
         onClick={() => router.push("/dashboard/links")}
@@ -295,12 +295,12 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
                 borderWidth={1}
                 flex="1"
                 h={250}
-                maxW="28%"
+                maxWidth="250px"
               >
                 <Heading fontSize="sm" mb={2} color="gray.500">
                   Total Link Clicks
                 </Heading>
-                <Text fontSize="4xl" fontWeight="bold">
+                <Text fontSize="5xl" fontWeight="bold">
                   {urlData.visit_count}
                 </Text>
               </Box>
@@ -313,7 +313,7 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
                 borderRadius="md"
                 borderWidth={1}
                 flex="1"
-                maxW="28%"
+                maxWidth="250px"
               >
                 <Heading fontSize="sm" mb={2} color="gray.500">
                   Top Click Location

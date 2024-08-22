@@ -116,7 +116,7 @@ const Links = () => {
 
   if (loading)
     return (
-      <Stack gap="15px" position="relative" top="60px">
+      <Stack gap="15px">
         <Skeleton height="100px" />
         <Skeleton height="100px" />
         <Skeleton height="100px" />
@@ -125,7 +125,11 @@ const Links = () => {
     );
   if (error)
     return (
-      <Text fontSize="2xl" fontWeight="bold" textAlign="center" position="relative" top="60px">
+      <Text
+        fontSize="2xl"
+        fontWeight="bold"
+        textAlign="center"
+      >
         Check you Internet connection and{" "}
         <a href="#" onClick={handleReload}>
           Reload the Page
@@ -139,7 +143,6 @@ const Links = () => {
         display: "flex",
         flexDirection: "column",
         gap: "15px",
-        padding: "20px",
       }}
     >
       <Text fontSize="3xl" fontWeight="bold" mb={2}>
@@ -206,7 +209,7 @@ const Links = () => {
                 </PopoverTrigger>
                 <PopoverContent minWidth="auto" width="auto">
                   <PopoverArrow />
-                  <PopoverBody >
+                  <PopoverBody>
                     <Flex gap="10px">
                       <IconButton
                         icon={<FaFacebook />}
@@ -260,6 +263,17 @@ const Links = () => {
               />
             </HStack>
           </Box>
+        ))}
+      {userData === null ||
+        (userData.length === 0 && (
+          <Text
+            fontSize="xl"
+            textAlign="center"
+            alignContent="center"
+            color="gray.500"
+          >
+            No shortened links yet.
+          </Text>
         ))}
     </div>
   );

@@ -13,12 +13,12 @@ import { FiChevronDown, FiLogOut } from "react-icons/fi";
 import { useTransition } from "react";
 import { logout } from "../login/actions";
 
-
 interface UserDropdownProps {
   email: string;
+  userName: string;
 }
 
-export default function UserDropdown({ email }: UserDropdownProps) {
+export default function UserDropdown({ email, userName }: UserDropdownProps) {
   const initial = email?.charAt(0).toUpperCase();
   const [isPending, startTransition] = useTransition();
 
@@ -45,9 +45,16 @@ export default function UserDropdown({ email }: UserDropdownProps) {
             >
               {initial}
             </Box>
-            <Text display={{ base: "none", md: "block" }}>{email}</Text>
             <Box as="span" display={{ base: "none", md: "block" }}>
-              <FiChevronDown />
+              <Box display="flex" alignItems="center" gap="5px">
+                <Box as="span">
+                  <Text fontWeight="bold">{userName}</Text>
+                  <Text>{email}</Text>
+                </Box>
+                <Box as="span">
+                  <FiChevronDown />
+                </Box>
+              </Box>
             </Box>
           </Flex>
         </MenuButton>

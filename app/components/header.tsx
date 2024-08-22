@@ -21,14 +21,17 @@ export default function Header({ onOpenSidebar }: HeaderProps) {
     <Flex
       as="header"
       align="center"
-      justify="space-evenly"
+      justify="space-between"
       p={4}
       bg="white"
       borderBottom="1px solid"
       borderColor="gray.200"
       position="fixed"
+      top="0"
+      right="0"
       width="100%"
       zIndex={1}
+      pl={{base:"20px", md: "270px"}}
     >
       <IconButton
         size="md"
@@ -45,16 +48,16 @@ export default function Header({ onOpenSidebar }: HeaderProps) {
 
           <Box >
             <Text fontWeight="bold">
-              {greetings} {userName}
+              {greetings}
             </Text>
-            <Text textAlign="center">{date()}</Text>
+            <Text>{date()}</Text>
           </Box>
         </Box>
       </Box>
       <Box as="span" display={{ base: "block", md: "none" }}>
         <Image src={logo} alt="Logo" width={80} style={{ height: 'auto' }} />
       </Box>
-      <UserDropdown email={userEmail} />
+      <UserDropdown email={userEmail}  userName={userName}/>
     </Flex>
   );
 }

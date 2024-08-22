@@ -13,7 +13,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <Sidebar isOpen={isOpen} onClose={onClose} />
       <Box flex="1" ml={{ base: 0, md: '250px' }} position="relative" width="100%">
         <Header onOpenSidebar={onOpen} />
-        <Box as="main" p="4" position="relative" top="60px">
+        <Box as="main" padding="20px 30px" position="relative" top="100px">
           {children}
         </Box>
       </Box>

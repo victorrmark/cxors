@@ -7,7 +7,7 @@ const DashBoard = async () => {
   
   return (
     <>
-    <div style={{padding: "20px"}}>
+    <div>
 
       <Text fontSize='3xl' fontWeight='bold' mb={10}>Cxors a new link</Text>
       <UrlShortener />

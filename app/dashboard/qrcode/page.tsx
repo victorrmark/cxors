@@ -85,7 +85,7 @@ const QRCodePage = () => {
 
   if (loading)
     return (
-      <Stack gap="15px" position="relative" top="60px">
+      <Stack gap="15px">
         <Skeleton height="100px" />
         <Skeleton height="100px" />
         <Skeleton height="100px" />
@@ -94,7 +94,7 @@ const QRCodePage = () => {
     );
   if (error)
     return (
-      <Text fontSize="2xl" fontWeight="bold" textAlign="center" position="relative" top="60px">
+      <Text fontSize="2xl" textAlign="center" color="gray.500">
         Check you Internet connection and{" "}
         <a href="#" onClick={handleReload}>
           Reload the Page
@@ -108,13 +108,12 @@ const QRCodePage = () => {
         display: "flex",
         flexDirection: "column",
         gap: "15px",
-        padding: "5px 20px",
       }}
     >
       <Text fontSize="3xl" fontWeight="bold" mb={2}>
         Cxorsed Codes
       </Text>
-      {userData ? (
+      {userData &&
         userData.map((item) => (
           <Box
             key={item.id}
@@ -158,9 +157,18 @@ const QRCodePage = () => {
             </Box>
           </Box>
         ))
-      ) : (
-        <h1 style={{ textAlign: "center" }}>No record found</h1>
-      )}
+      }
+      {userData === null ||
+        (userData.length === 0 && (
+          <Text
+            fontSize="xl"
+            textAlign="center"
+            alignContent="center"
+            color="gray.500"
+          >
+            No QRCodes yet.
+          </Text>
+        ))}
     </div>
   );
 };
