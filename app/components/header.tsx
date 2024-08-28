@@ -3,7 +3,7 @@ import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import logo from "../../public/logo.png";
 import Image from "next/image";
-import { greet, date } from "./greetings";
+import { greet, date } from "../../utils/greetings";
 import UserDropdown from "./userDropdown";
 
 interface HeaderProps {

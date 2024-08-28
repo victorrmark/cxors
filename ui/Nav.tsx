@@ -85,6 +85,7 @@ const Navbar = () => {
             bg="#006bb2"
             color="white"
             _hover={{ bg: "#005a93" }}
+            data-id="signup"
           >
             Sign Up
           </Button>

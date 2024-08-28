@@ -174,7 +174,7 @@ export default function UrlShortener() {
           bg="#006bb2"
           color="white"
           _hover={{ bg: "#005a99" }}
-          isDisabled={!isValidUrl || urlExists || isLoading} // Add isLoading check
+          isDisabled={!isValidUrl || urlExists || isLoading}
         >
           {isLoading ? "Loading..." : "Shorten URL"}
         </Button>

@@ -2,8 +2,7 @@
 import { login } from "./actions";
 import { useState } from "react";
 import { useTransition } from "react";
-import { FaGoogle } from 'react-icons/fa';
-
+import { FaGoogle } from "react-icons/fa";
 
 import {
   Box,
@@ -70,11 +69,13 @@ const Login = () => {
             Log in to &#34;cxors&#34; a link :)
           </Heading>
 
-          {error && <Text fontSize='l' color='red'>{error}</Text>}
+          {error && (
+            <Text fontSize="l" color="red">
+              {error}
+            </Text>
+          )}
 
           <form onSubmit={handleSubmit}>
-
-
             <label htmlFor="email" className="label">
               Email
             </label>
@@ -101,13 +102,20 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button className="button" formAction={login} disabled={isPending}>
+            <button
+              className="button"
+              formAction={login}
+              disabled={isPending}
+              data-id="login"
+            >
               {isPending ? "Logging in..." : "Login"}
             </button>
           </form>
 
           <Text>or</Text>
-          <Button w="full" leftIcon={<Icon as={FaGoogle} />}>Sign in with Google</Button>
+          <Button w="full" leftIcon={<Icon as={FaGoogle} />}>
+            Sign in with Google
+          </Button>
           <Text>
             Don’t have an account?{" "}
             <Link href="/signup" color="blue.500">
