@@ -40,10 +40,10 @@ jobs:
       
       # Build the app
       - name: Build the app
-        run: npm run build
+        run: npm build
 
       - name: Run Cypress tests
-        run: npm run test:coverage && npm run test:e2e
+        run: npm test:coverage && npm test:e2e
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
