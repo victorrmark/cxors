@@ -33,12 +33,12 @@ jobs:
       - name: Install dependencies
         run: npm install
       
-      # Add environment variables for Supabase
-      - name: Set Supabase environment variables
+      - name: Set Supabase environment variables (SUPABASE_URL)
         run: echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> $GITHUB_ENV
+
+      - name: Set Supabase environment variables (SUPABASE_ANON_KEY)
         run: echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> $GITHUB_ENV
       
-      # Build the app
       - name: Build the app
         run: npm build
 
