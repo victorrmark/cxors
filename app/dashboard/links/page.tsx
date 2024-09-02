@@ -27,7 +27,6 @@ import {
   FaShareAlt,
 } from "react-icons/fa";
 import { createClient } from "@/utils/supabase/client";
-// import { useUserContext } from "../../context/userContext";
 import { useRouter } from "next/navigation";
 
 type UrlData = {
@@ -44,7 +43,6 @@ const Links = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const supabase = createClient();
-  // const { user } = useUserContext();
   const toast = useToast();
   const router = useRouter();
 

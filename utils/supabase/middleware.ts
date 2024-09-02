@@ -33,12 +33,10 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
   
 
-  const publicRoutes = ['/', '/login', '/signup']
+  const publicRoutes = ['/', '/login', '/signup', '/resetpassword', '/forgotPassword']
 
-  // if (publicRoutes.includes(request.nextUrl.pathname)) {
-  //   return supabaseResponse;
-  // }
-  if (publicRoutes.includes(request.nextUrl.pathname) || request.nextUrl.pathname.startsWith('/shortPath')) {
+
+  if (publicRoutes.includes(request.nextUrl.pathname)) {
     return supabaseResponse;
   }
 
@@ -48,31 +46,11 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (user && request.nextUrl.pathname === '/') {
+  if (user && request.nextUrl.pathname === '/login') {
     const url = request.nextUrl.clone();
     url.pathname = '/dashboard';
     return NextResponse.redirect(url);
   }
-
-  // if (
-  //   !user &&
-  //   !publicRoutes.includes(request.nextUrl.pathname) &&
-  //   // !request.nextUrl.pathname.startsWith('/login') &&
-  //   !request.nextUrl.pathname.startsWith('/auth')
-  // ) {
-  //   const url = request.nextUrl.clone()
-  //   url.pathname = '/login'
-  //   return NextResponse.redirect(url)
-  // }
-
-  // if (!publicRoutes.includes(request.nextUrl.pathname)) {
-  //   if (!user) {
-  //     const url = request.nextUrl.clone()
-  //     url.pathname = '/login'
-  //     console.log('Redirecting to /login');
-  //     return NextResponse.redirect(url)
-  //   }
-  // }
 
   return supabaseResponse
 }

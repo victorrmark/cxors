@@ -1,6 +1,5 @@
 'use client'
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client'
 import { User } from '@supabase/supabase-js';
 
@@ -13,7 +12,6 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     const supabase = createClient();
@@ -22,11 +20,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       if (data.user) {
         setUser(data.user);
       } 
-      // else {
-      //   router.push('/login');
-      // }
     });
-  }, [router]);
+  }, []);
 
 
   return (
