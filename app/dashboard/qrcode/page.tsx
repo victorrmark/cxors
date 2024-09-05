@@ -1,34 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import QRCode from "react-qr-code";
+import { toPng } from "html-to-image";
+
 import {
   Box,
   Heading,
   Text,
-  IconButton,
-  HStack,
-  useToast,
+  Button,
   Divider,
   Stack,
   Skeleton,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
-  PopoverArrow,
-  Flex,
 } from "@chakra-ui/react";
-import { CopyIcon, DeleteIcon } from "@chakra-ui/icons";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaLinkedin,
-  FaEnvelope,
-  FaShareAlt,
-} from "react-icons/fa";
+import { DownloadIcon } from "@chakra-ui/icons";
 import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
 
 type UrlData = {
   id: any;
@@ -44,6 +30,8 @@ const QRCodePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const supabase = createClient();
+
+  const qrRef = useRef<HTMLDivElement>(null);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -73,12 +61,27 @@ const QRCodePage = () => {
     fetchData();
   }, [supabase]);
 
-
   const handleReload = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     event.preventDefault();
     location.reload();
+  };
+
+  const downloadQRCode = async () => {
+    if (qrRef.current === null) {
+      return;
+    }
+
+    try {
+      const dataUrl = await toPng(qrRef.current);
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = "qrcode.png";
+      link.click();
+    } catch (err) {
+      console.error("Failed to download QR code:", err);
+    }
   };
 
   if (loading)
@@ -121,41 +124,52 @@ const QRCodePage = () => {
             boxShadow="md"
             className="links"
             display={{ base: "block", md: "flex" }}
-            // justifyContent="space-between"
             alignItems="flex-start"
-            gap="10px"
+            gap="15px"
           >
-            <div>
+            <div style={{ display:"flex", justifyContent:"center" }} ref={qrRef} >
               <QRCode value={`${baseUrl}/${item.short_path}`} size={128} />
             </div>
-            <Box>
-              <Heading
-                size="md"
-                mb={2}
-                color="blue.500"
-              >
-                {item.title ? item.title : item.original_url + " - undefined"}
-              </Heading>
-              <Text fontSize="sm" color="gray.500">
-                Short URL:{" "}
-                <a
-                  href={`${baseUrl}/${item.short_path}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  cxorz.vercel.app/{item.short_path}
-                </a>
-              </Text>
-              <Text fontSize="sm" color="gray.500" mb={5}>
-                Long URL: {item.original_url}
-              </Text>
-              <Text fontSize="xs" color="gray.400" mt={5}>
-                Created on: {new Date(item.created_at).toLocaleString()}
-              </Text>
+            <Box
+              flex="1"
+              display={{ base: "block", md: "flex" }}
+              justifyContent="space-between"
+              alignItems="flex-start"
+              gap="10px"
+            >
+              <Box>
+                <Heading size="md" mb={2} color="blue.500">
+                  {item.title ? item.title : item.original_url + " - undefined"}
+                </Heading>
+                <Text fontSize="sm" color="gray.500">
+                  Short URL:{" "}
+                  <a
+                    href={`${baseUrl}/${item.short_path}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    cxorz.vercel.app/{item.short_path}
+                  </a>
+                </Text>
+                <Text fontSize="sm" color="gray.500" mb={5}>
+                  Long URL: {item.original_url}
+                </Text>
+                <Text fontSize="xs" color="gray.400" mt={5}>
+                  Created on: {new Date(item.created_at).toLocaleString()}
+                </Text>
+              </Box>
+              <Divider
+                display={{ base: "block", md: "none" }}
+                borderColor="gray.200"
+                mt={2}
+              />
+              <Button onClick={downloadQRCode} mt="7px" leftIcon={<DownloadIcon />}>
+                Download QR Code
+              </Button>
+
             </Box>
           </Box>
-        ))
-      }
+        ))}
       {userData === null ||
         (userData.length === 0 && (
           <Text

@@ -29,8 +29,6 @@ const ProfileSettings = () => {
   const toast = useToast();
 
   useEffect(() => {
-    const supabase = createClient();
-
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) {
         setFetchedName(data.user.user_metadata.display_name);

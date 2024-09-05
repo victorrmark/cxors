@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { CopyIcon } from "@chakra-ui/icons";
 import { FaTwitter, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { createClient } from "@/utils/supabase/client";
 
 export default function UrlShortener() {
   const [originalUrl, setOriginalUrl] = useState("");
@@ -32,9 +33,12 @@ export default function UrlShortener() {
   const [error, setError] = useState("");
   const [isValidUrl, setIsValidUrl] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [pathArray, setPathArray] = useState<String[]>([]);
+
   const [urlExists, setUrlExists] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const supabase = createClient();
 
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOriginalUrl(e.target.value);
@@ -46,37 +50,27 @@ export default function UrlShortener() {
     setIsValidUrl(urlPattern.test(originalUrl));
   };
 
-  const checkUrlExists = async () => {
-    if (originalUrl) {
-      try {
-        const response = await fetch(
-          `../api/check-url?url=${encodeURIComponent(originalUrl)}`
-        );
-        const data = await response.json();
-        setUrlExists(data.exists);
-      } catch (error) {
-        console.error("Error checking URL existence:", error);
-      }
-    }
-  };
+  useEffect(() => {
+    const getLinks = async () => {
+      let { data, error } = await supabase.from("urls").select("short_path");
 
-  const handleNewUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomPath(e.target.value);
-    checkUrlExists();
-  };
+      if(error){
+        console.error(error)
+      }else{
+        const pathsArray = data?.map((path) => path.short_path);
+        setPathArray(pathsArray as String[]);
+      }
+    };
+    getLinks();
+  }, []);
+
+  useEffect(() => {
+    setUrlExists(pathArray.includes(customPath));
+  }, [customPath, pathArray]);
+
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
-    if (!isValidUrl) {
-      setError("Please enter a valid URL.");
-      return;
-    }
-
-    if (urlExists) {
-      setError("This URL has already been shortened.");
-      return;
-    }
 
     setIsLoading(true);
 
@@ -93,24 +87,23 @@ export default function UrlShortener() {
 
       if (response.ok) {
         setShortUrl(data.shortUrl);
-        setUrlTitle(data.urlTitle);
+        setOriginalUrl("")
+        setCustomPath("")
+        setUrlTitle("");
         setError("");
         onOpen();
       } else if (data.message.includes("duplicate key value ")) {
         setError("pathname already exist, try another name");
         setShortUrl("");
-        setUrlTitle("");
         onOpen();
       } else {
         setError(data.message || "An error occurred.");
         setShortUrl("");
-        setUrlTitle("");
         onOpen();
       }
     } catch (error) {
       setError("An unexpected error occurred.");
       setShortUrl("");
-      setUrlTitle("");
       onOpen();
     } finally {
       setIsLoading(false);
@@ -164,7 +157,7 @@ export default function UrlShortener() {
             value={customPath}
             isInvalid={urlExists}
             errorBorderColor="red.500"
-            onChange={handleNewUrl}
+            onChange={(e) => setCustomPath(e.target.value)}
             placeholder="myurl"
           />
           {urlExists && <Text color="red.500">custom path already exits.</Text>}
@@ -238,7 +231,7 @@ export default function UrlShortener() {
                         colorScheme="twitter"
                         variant="outline"
                         size="sm"
-                        color="#1DA1F2" // Twitter blue
+                        color="#1DA1F2"
                       />
                     </div>
                     <div>
@@ -254,7 +247,7 @@ export default function UrlShortener() {
                         colorScheme="facebook"
                         variant="outline"
                         size="sm"
-                        color="#1877F2" // Facebook blue
+                        color="#1877F2"
                       />
                     </div>
                     <div>
@@ -270,7 +263,7 @@ export default function UrlShortener() {
                         colorScheme="linkedin"
                         variant="outline"
                         size="sm"
-                        color="#0077B5" // LinkedIn blue
+                        color="#0077B5"
                       />
                     </div>
                   </Flex>

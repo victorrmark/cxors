@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import QRCode from "react-qr-code";
 import { Button } from "@chakra-ui/react";
+import { toPng } from 'html-to-image';
 import {
   Box,
   Heading,
@@ -72,7 +73,6 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
 
     fetchUrlDetails();
   }, [supabase, id]);
-  console.log(urlData);
 
   const copyToClipboard = (url: string) => {
     navigator.clipboard.writeText(url);
@@ -95,21 +95,22 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
     });
   };
 
-  const downloadQRCode = () => {
-    if (qrRef.current) {
-      const canvas = qrRef.current?.querySelector("canvas");
-      if (canvas) {
-        const dataURL = canvas.toDataURL("image/png");
-        // .replace("image/png", "image/octet-stream");
-        const link = document.createElement("a");
-        link.href = dataURL;
-        link.download = "qrcode.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
+  const downloadQRCode = async () => {
+    if (qrRef.current === null) {
+      return;
+    }
+
+    try {
+      const dataUrl = await toPng(qrRef.current);
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = "qrcode.png";
+      link.click();
+    } catch (err) {
+      console.error("Failed to download QR code:", err);
     }
   };
+
 
   const handleReload = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -338,7 +339,7 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
             </Heading>
             <div>
               <div ref={qrRef}>
-                <QRCode value={`${baseUrl}/${urlData.short_path}`} size={128} />
+                <QRCode value={`${baseUrl}/${urlData.short_path}`} size={200} />
               </div>
               <Button onClick={downloadQRCode} mt="15px">
                 Download QR Code

@@ -192,7 +192,7 @@ const Links = () => {
             <Divider
               display={{ base: "block", md: "none" }}
               borderColor="gray.200"
-              my={4}
+              mt={4}
             />
             <HStack mt={4} spacing={4}>
               <IconButton
