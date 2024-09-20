@@ -62,7 +62,7 @@ export default function UrlShortener() {
       }
     };
     getLinks();
-  }, []);
+  }, [supabase]);
 
   useEffect(() => {
     setUrlExists(pathArray.includes(customPath));
@@ -131,12 +131,13 @@ export default function UrlShortener() {
             value={originalUrl}
             onChange={handleUrlChange}
             isInvalid={!isValidUrl}
+            data-id="url"
             placeholder="www.exampleurl.com"
             errorBorderColor="red.500"
             required
           />
           {!isValidUrl && (
-            <Text color="red.500">Please enter a valid URL.</Text>
+            <Text color="red.500" data-id="invalid-url">Please enter a valid URL.</Text>
           )}
         </FormControl>
 
@@ -147,6 +148,7 @@ export default function UrlShortener() {
             value={urlTitle}
             placeholder="Birthday URL"
             onChange={(e) => setUrlTitle(e.target.value)}
+            data-id="title"
           />
         </FormControl>
 
@@ -159,8 +161,9 @@ export default function UrlShortener() {
             errorBorderColor="red.500"
             onChange={(e) => setCustomPath(e.target.value)}
             placeholder="myurl"
+            data-id="path"
           />
-          {urlExists && <Text color="red.500">custom path already exits.</Text>}
+          {urlExists && <Text color="red.500" data-id="invalid-path">custom path already exits.</Text>}
         </FormControl>
         <Button
           type="submit"
@@ -168,6 +171,7 @@ export default function UrlShortener() {
           color="white"
           _hover={{ bg: "#005a99" }}
           isDisabled={!isValidUrl || urlExists || isLoading}
+          data-id="submit"
         >
           {isLoading ? "Loading..." : "Shorten URL"}
         </Button>
@@ -182,7 +186,7 @@ export default function UrlShortener() {
                 Ops! Try again!
               </Text>
             ) : (
-              <Text fontSize="2xl" fontWeight="bold">
+              <Text fontSize="2xl" fontWeight="bold" data-id="path-header">
                 Yeah!! You have Cxorsed a link!
               </Text>
             )}
@@ -199,6 +203,7 @@ export default function UrlShortener() {
                     isExternal
                     color="#006bb2"
                     flex="1"
+                    data-id="short-url"
                   >
                     {shortUrl}
                   </ChakraLink>
@@ -210,6 +215,7 @@ export default function UrlShortener() {
                     ml={2}
                     variant="outline"
                     colorScheme="blue"
+                    data-id="copy-url"
                   />
                 </Flex>
 
@@ -273,7 +279,7 @@ export default function UrlShortener() {
           </ModalBody>
 
           <ModalFooter>
-            <Button onClick={onClose} colorScheme="blue">
+            <Button onClick={onClose} colorScheme="blue" data-id="close">
               Close
             </Button>
           </ModalFooter>

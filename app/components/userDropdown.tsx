@@ -31,7 +31,7 @@ export default function UserDropdown({ email, userName }: UserDropdownProps) {
   return (
     <Box _hover={{ bg: "gray.50" }} p={1}>
       <Menu>
-        <MenuButton as={Box}>
+        <MenuButton as={Box} data-id="open-logout">
           <Flex alignItems="center" gap="2">
             <Box
               as="span"
@@ -63,6 +63,7 @@ export default function UserDropdown({ email, userName }: UserDropdownProps) {
             icon={<FiLogOut />}
             onClick={handleLogout}
             isDisabled={isPending}
+            data-id="logout"
           >
             {isPending ? "Logging out..." : "Logout"}
           </MenuItem>

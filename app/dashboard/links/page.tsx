@@ -143,7 +143,7 @@ const Links = () => {
         gap: "15px",
       }}
     >
-      <Text fontSize="3xl" fontWeight="bold" mb={2}>
+      <Text fontSize="3xl" fontWeight="bold" mb={2} data-id="heading">
         Cxorsed Links
       </Text>
       {userData &&
@@ -199,6 +199,7 @@ const Links = () => {
                 icon={<CopyIcon />}
                 aria-label="Copy URL"
                 onClick={() => copyToClipboard(`${baseUrl}/${item.short_path}`)}
+                data-id="copy-url"
               />
 
               <Popover isLazy>

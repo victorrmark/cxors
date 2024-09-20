@@ -78,7 +78,7 @@ const Login = () => {
             </Heading>
 
             {error && (
-              <Text fontSize="l" color="red">
+              <Text fontSize="l" color="red" data-id="invalid-login">
                 {error}
               </Text>
             )}

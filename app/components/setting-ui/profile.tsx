@@ -36,7 +36,7 @@ const ProfileSettings = () => {
         setEmail(data.user.email as string);
       }
     });
-  }, []);
+  }, [supabase.auth]);
 
   useEffect(() => {
     setIsLoading(displayName !== fetchedName);
@@ -82,6 +82,7 @@ const ProfileSettings = () => {
                 type="text"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
+                data-id="display-name"
               />
             </FormControl>
 
@@ -97,6 +98,7 @@ const ProfileSettings = () => {
               bg="#006bb2"
               maxWidth="200px"
               isDisabled={!isLoading}
+              data-id="change-name"
             >
               {isSubmitting ? "updating..." : "Update display name"}
             </Button>
@@ -108,7 +110,7 @@ const ProfileSettings = () => {
         <Text fontSize="md" fontWeight="bold" mb={2}>
           Email Address
         </Text>
-        <Text fontSize="md">{email}</Text>
+        <Text fontSize="md" data-id="user-email">{email}</Text>
       </Box>
     </>
   );

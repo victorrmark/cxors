@@ -27,10 +27,10 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const sidebarItems = [
-    { label: "Home", icon: FiHome, href: "/dashboard/home" },
-    { label: "Links", icon: FiLink, href: "/dashboard/links" },
-    { label: "QR Code", icon: FiGrid, href: "/dashboard/qrcode" },
-    { label: "Settings", icon: FiSettings, href: "/dashboard/settings" },
+    { label: "Home", icon: FiHome, href: "/dashboard/home", data: "home" },
+    { label: "Links", icon: FiLink, href: "/dashboard/links", data: "links" },
+    { label: "QR Code", icon: FiGrid, href: "/dashboard/qrcode", data: "qrcode" },
+    { label: "Settings", icon: FiSettings, href: "/dashboard/settings", data: "settings" },
   ];
 
   return (
@@ -60,6 +60,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   icon={item.icon}
                   href={item.href}
                   label={item.label}
+                  data={item.data}
                 />
               ))}
             </VStack>
@@ -80,6 +81,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   icon={item.icon}
                   href={item.href}
                   label={item.label}
+                  data={item.data}
                 />
               ))}
             </VStack>

@@ -50,6 +50,7 @@ const PasswordSettings = () => {
 
     if (newPassword.length < 6) {
         setError('Password must be at least 6 characters long' )
+        setIsLoading(false)
         return
     }
 
@@ -92,6 +93,7 @@ const PasswordSettings = () => {
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="Enter current password"
+                  data-id="current-pw"
                 />
               </FormControl>
 
@@ -102,6 +104,7 @@ const PasswordSettings = () => {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Enter new password"
+                  data-id="new-pw"
                 />
               </FormControl>
 
@@ -112,10 +115,11 @@ const PasswordSettings = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm new password"
+                  data-id="confirm-pw"
                 />
               </FormControl>
 
-              {error && <Text color="red.500" mb={3}>
+              {error && <Text color="red.500" mb={3} data-id="err">
                 {error}
               </Text> }
 
@@ -125,6 +129,7 @@ const PasswordSettings = () => {
                 bg="#006bb2"
                 maxWidth="200px"
                 isDisabled={isLoading}
+                data-id="change-pw"
               >
                 {isLoading ? "Changing Password ..." : "Change Password"}
               </Button>

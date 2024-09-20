@@ -98,6 +98,7 @@ const ForgotPassword = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="email"
+          data-id="input-feild"
           id="email"
           name="email"
           className="input"
@@ -106,7 +107,7 @@ const ForgotPassword = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         {error && (
-          <Text mt="5px" color="red">
+          <Text mt="5px" color="red" data-id="err">
             We cannot find your email
           </Text>
         )}
@@ -115,6 +116,7 @@ const ForgotPassword = () => {
           className="button"
           style={{ marginTop: "20px", marginBottom: "15px" }}
           disabled={isLoading || email.length < 1}
+          data-id="submit"
         >
           Submit
         </button>
@@ -126,6 +128,7 @@ const ForgotPassword = () => {
         _hover={{ color: "#006bb2", cursor: "pointer" }}
         variant="link"
         onClick={() => router.push("/login")}
+        data-id="go-back"
       >
         Back to Login
       </Button>

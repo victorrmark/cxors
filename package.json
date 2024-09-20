@@ -27,9 +27,14 @@
     "react-qr-code": "^2.0.15"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "@cypress/code-coverage": "^3.12.48",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "babel-plugin-istanbul": "^7.0.0",
     "cypress": "^13.14.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",

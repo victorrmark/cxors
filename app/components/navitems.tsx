@@ -6,9 +6,10 @@ interface NavItemProps {
   icon: IconType;
   label: string;
   href: string;
+  data: string;
 }
 
-export default function NavItem({ icon, label, href }: NavItemProps) {
+export default function NavItem({ icon, label, href, data }: NavItemProps) {
   const pathname = usePathname();
   const isActive = pathname === href;
 
@@ -18,6 +19,7 @@ export default function NavItem({ icon, label, href }: NavItemProps) {
       style={{ textDecoration: "none" }}
       w="100%"
       _hover={{ textDecoration: "none" }}
+      data-id={data}
     >
       <Flex
         align="center"

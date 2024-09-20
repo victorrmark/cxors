@@ -19,7 +19,7 @@ const Password = dynamic(() => import("../../components/setting-ui/password"));
 const UpdateUserForm = () => {
   return (
     <div>
-      <Text fontSize="3xl" fontWeight="bold" mb={3}>
+      <Text fontSize="3xl" fontWeight="bold" mb={3} data-id="heading">
         Settings
       </Text>
       <Stack spacing='30px'>

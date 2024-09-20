@@ -1,30 +1,5 @@
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
+
 // declare global {
 //   namespace Cypress {
 //     interface Chainable {
@@ -35,3 +10,52 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add("getByDataId", (dataTestSelector) =>{
+    return cy.get(`[data-id="${dataTestSelector}"]`)
+})
+
+Cypress.Commands.add("login", () => {
+    cy.session('login', () => {
+      const email = Cypress.env("email");
+      const password = Cypress.env("password");
+    
+      if (!email || !password) {
+        throw new Error("Login email or password is not defined in environment variables");
+      }
+  
+      cy.visit("/login");
+    
+      cy.get('input[name="email"]').type(email);
+      cy.get('input[name="password"]').type(password);
+    
+      cy.get('[data-id="login"]').click();
+    
+      cy.url().should("include", "/dashboard");
+    })
+  
+  });
+  
+  Cypress.Commands.add("interceptUserData", () => {
+    cy.intercept(
+      "GET",
+      "https://hmonshbvvhhiuppdlwxg.supabase.co/auth/v1/user",
+      {
+        statusCode: 200,
+        body: {
+          email: "mockuser@example.com",
+          user_metadata: {
+            display_name: "Mock User",
+          },
+        },
+      }
+    ).as("getUserData");
+  });
+
+  Cypress.Commands.add('assertValueCopiedToClipboard', value => {
+    cy.window().then(win => {
+      win.navigator.clipboard.readText().then(text => {
+        expect(text).to.eq(value)
+      })
+    })
+  })

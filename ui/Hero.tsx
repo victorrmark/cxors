@@ -13,7 +13,7 @@ const HeroSection = () => {
     >
       <Flex justifyContent="center" alignItems="center">
         <VStack spacing={6} maxW="2xl">
-          <Heading as="h1" size="2xl" fontWeight="bold">
+          <Heading as="h1" size="2xl" fontWeight="bold" data-id="heading">
             Simplify Your Links with Our Powerful Shortening Tool
           </Heading>
           <Text fontSize="lg">
