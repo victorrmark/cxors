@@ -43,7 +43,14 @@ jobs:
         run: npm run build
 
       - name: Run Cypress tests
-        run: npm test:coverage && npm test:e2e
+        env:
+          CYPRESS_BASE_URL: https://cxors.vercel.app
+          CYPRESS_EMAIL: ${{ secrets.CYPRESS_EMAIL }}
+          CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+        run: 
+          npm run cypress:e2e &&
+          npm run cypress:component &&
+          npm run test:coverage
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4

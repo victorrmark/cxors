@@ -24,7 +24,7 @@ import Router from 'next/router'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import { mount } from 'cypress/react18'
+import { mount } from 'cypress/react18';
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
@@ -59,7 +59,7 @@ Cypress.Commands.add('nextMount', (component, options) => {
       isReady: true,
       ...params,
   });
-  const router = createRouter(options?.router || {});
+  // const router = createRouter(options?.router || {});
 
   // const createHeadManager = (params) => ({
   //     updateHead: cy.stub().as('head:updateHead'),
@@ -84,9 +84,7 @@ Cypress.Commands.add('nextMount', (component, options) => {
   // )
 })
 
-
-
-
+export {}
 
 
 // Example use:

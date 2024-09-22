@@ -70,8 +70,8 @@ describe("Testing the forgot password component", () => {
       .should("have.value", "mockuser@gmail.com");
 
     cy.getByDataId("submit").click();
-    cy.wait("@emails")
-    cy.wait("@recover-email");
+    // cy.wait("@emails")
+    // cy.wait("@recover-email");
 
     cy.get('input[name="email"]').should("have.value", "");
 

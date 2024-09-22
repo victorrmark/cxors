@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 
 const ForgotPassword = () => {
-  const [usersEmails, setUsersEmails] = useState<String[]>([]);
+  const [usersEmails, setUsersEmails] = useState<string[]>([]);
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

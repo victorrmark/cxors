@@ -64,12 +64,14 @@ describe("user login with valid credentials", () => {
             cy.getByDataId("submit").should('be.disabled')
         })
 
+        const baseUrl = Cypress.env('baseUrl');
+
         it("fills url shortening form with valid credentials", ()=>{
             cy.wait("@shortpaths")
 
             cy.intercept(
                 "POST",
-                "https://cxors.vercel.app/api/shorten",
+                `${baseUrl}/api/shorten`,
                 {
                   statusCode: 200,
                   body: {"shortUrl":"https://cxorz.vercel.app/altschool"},

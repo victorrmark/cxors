@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:e2e": "cypress run --e2e",
+    "cypress:component": "cypress run --component",
+    "test:coverage": "nyc report --reporter=lcov"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -27,9 +30,6 @@
     "react-qr-code": "^2.0.15"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
     "@cypress/code-coverage": "^3.12.48",
     "@types/node": "^20",
     "@types/react": "^18",
