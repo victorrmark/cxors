@@ -66,10 +66,8 @@ export async function logout() {
 
   if (error) {
     console.error('Error logging out:', error.message)
-    // Optionally, you could return an error message to handle in the client-side
     return { error: error.message }
   }
 
-  // Redirect to the login page after logout
   redirect('/login')
 }

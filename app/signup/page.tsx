@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signup } from "../login/actions";
-
+import { createClient } from "@/utils/supabase/client";
 import React from "react";
 import {
   Box,
@@ -10,7 +10,6 @@ import {
   VStack,
   HStack,
   Link,
-  Icon,
   Input,
   InputGroup,
   InputRightElement,
@@ -19,7 +18,7 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/react";
-import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const SignupPage = () => {
@@ -32,6 +31,20 @@ const SignupPage = () => {
     useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, isLoading] = useState(false);
+
+  const supabase = createClient();
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) {
+        isLoading(true);
+        window.location.href = "/dashboard";
+      }
+    });
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,6 +74,19 @@ const SignupPage = () => {
     } else {
       window.location.href = "/dashboard";
     }
+  };
+
+  const loginWithGoogle = async () => {
+    // event.preventDefault();
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "http://localhost:3000/dashboard/home",
+        queryParams: {
+          prompt: "consent",
+        },
+      },
+    });
   };
 
   return (
@@ -177,9 +203,14 @@ const SignupPage = () => {
           </form>
 
           <Text>or</Text>
-          <Button w="full" leftIcon={<Icon as={FaGoogle} />}>
+          <button
+            className={`google-button ${loading ? "loading" : ""}`}
+            onClick={loginWithGoogle}
+            disabled={loading}
+          >
+            <FcGoogle />
             Sign up with Google
-          </Button>
+          </button>
           <Text>
             Already have an account?{" "}
             <Link href="/login" color="blue.500">
