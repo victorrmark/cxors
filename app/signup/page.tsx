@@ -92,6 +92,13 @@ const SignupPage = () => {
   return (
     <HStack h="100vh">
       <Box
+        as="div"
+        flex="1"
+        bg="gray.100"
+        display={{ base: "none", md: "block" }}
+        className="box sign-up"
+      ></Box>
+      <Box
         flex="1"
         p="2rem"
         display="flex"
@@ -220,13 +227,6 @@ const SignupPage = () => {
         </VStack>
       </Box>
 
-      <Box
-        as="div"
-        flex="1"
-        bg="gray.100"
-        display={{ base: "none", md: "block" }}
-        className="box sign-up"
-      ></Box>
     </HStack>
   );
 };
