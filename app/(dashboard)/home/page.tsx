@@ -1,10 +1,9 @@
+"use client"
 import { Text } from '@chakra-ui/react'
 import UrlShortener from '../../components/shorturl'
 
-const DashBoard = async () => {
+const DashBoard = () => {
 
-
-  
   return (
     <>
     <div>

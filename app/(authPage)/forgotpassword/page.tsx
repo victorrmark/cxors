@@ -1,6 +1,6 @@
 "use client";
 
-import { createClient } from "../../utils/supabase/client";
+import { createClient } from "../../../lib/supabase/client";
 import { useEffect, useState } from "react";
 import { VStack, Heading, Text, Button, useToast, Box, HStack } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";

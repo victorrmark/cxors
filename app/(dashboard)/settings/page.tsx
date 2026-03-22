@@ -1,14 +1,7 @@
 "use client";
 import {
-  Box,
-  Button,
-  Input,
-  FormControl,
-  FormLabel,
   Stack,
-  Heading,
   Text,
-  Flex,
 } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 

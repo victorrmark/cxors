@@ -14,7 +14,7 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { DownloadIcon } from "@chakra-ui/icons";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 type UrlData = {
   id: any;

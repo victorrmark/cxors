@@ -22,8 +22,12 @@ form {
   width: 100%;
 }
 
-.sign-up {
+.signup-image {
   background-image: url("../public/signup.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 
 .label {
@@ -106,4 +110,19 @@ form {
 
 .google-button.loading {
   cursor: progress;
+}
+
+.signup-container{
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+}
+
+.signup-page{
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 1rem;
 }

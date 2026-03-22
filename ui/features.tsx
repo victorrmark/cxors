@@ -42,7 +42,7 @@ const FeaturesSection = () => {
             Detailed Analytics
           </Heading>
           <Text textAlign="center">
-            nderstand your audience with comprehensive analytics. Track clicks,
+            Understand your audience with comprehensive analytics. Track clicks,
             geographical locations, referral sources, and device types. Use this
             data to optimize your strategies and maximize engagement.
           </Text>

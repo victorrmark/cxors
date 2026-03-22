@@ -30,7 +30,7 @@ import {
   FaEnvelope,
   FaShareAlt,
 } from "react-icons/fa";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 type UrlData = {
   id: string;
@@ -86,7 +86,7 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
 
   const deleteLink = async () => {
     await supabase.from("urls").delete().eq("id", id);
-    router.push("/dashboard/links");
+    router.push("/links");
     toast({
       title: "Link deleted",
       status: "success",
@@ -164,7 +164,7 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
     <div>
       <Button
         variant="ghost"
-        onClick={() => router.push("/dashboard/links")}
+        onClick={() => router.push("/links")}
         mb="10px"
         leftIcon={<ChevronLeftIcon />}
       >

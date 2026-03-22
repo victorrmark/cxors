@@ -1,8 +1,9 @@
+'use client'
 import Link from "next/link";
 import error from "../public/404.png";
 import Image from "next/image";
 
-import { Box, Stack, HStack, Text, Heading } from "@chakra-ui/react";
+import { Box, Stack, Text, Heading } from "@chakra-ui/react";
 
 export default function NotFound() {
   return (

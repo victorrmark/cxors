@@ -1,6 +1,6 @@
 "use client";
-import { login } from "./actions";
-import { useState, useEffect } from "react";
+import { login } from "@/app/actions/authActions";
+import { useState } from "react";
 import { useTransition } from "react";
 import { FcGoogle } from "react-icons/fc";
 
@@ -15,7 +15,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,16 +27,16 @@ const Login = () => {
   const router = useRouter();
   const supabase = createClient();
 
-  useEffect(() => {
-    const supabase = createClient();
+  // useEffect(() => {
+  //   const supabase = createClient();
 
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) {
-        isLoading(true);
-        window.location.href = "/dashboard";
-      }
-    });
-  }, []);
+  //   supabase.auth.getUser().then(({ data }) => {
+  //     if (data.user) {
+  //       isLoading(true);
+  //       window.location.href = "/dashboard";
+  //     }
+  //   });
+  // }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,22 +57,25 @@ const Login = () => {
         }
       } else {
         isLoading(true);
-        window.location.href = "/dashboard";
+        window.location.href = "/home";
       }
     });
   };
 
   const loginWithGoogle = async () => {
     // event.preventDefault();
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "https://cxors.vercel.app/dashboard/home",
+        redirectTo: `${`${process.env.BASE_URL}/home`}`,
         queryParams: {
           prompt: "consent",
         },
       },
     });
+    if(error) {
+      setError(error.message);
+    }
   };
 
   return (

@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { CopyIcon } from "@chakra-ui/icons";
 import { FaTwitter, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 export default function UrlShortener() {
   const [originalUrl, setOriginalUrl] = useState("");
@@ -50,23 +50,23 @@ export default function UrlShortener() {
     setIsValidUrl(urlPattern.test(originalUrl));
   };
 
-  useEffect(() => {
-    const getLinks = async () => {
-      let { data, error } = await supabase.from("urls").select("short_path");
+  // useEffect(() => {
+  //   const getLinks = async () => {
+  //     let { data, error } = await supabase.from("urls").select("short_path");
 
-      if(error){
-        console.error(error)
-      }else{
-        const pathsArray = data?.map((path) => path.short_path);
-        setPathArray(pathsArray as String[]);
-      }
-    };
-    getLinks();
-  }, [supabase]);
+  //     if(error){
+  //       console.error(error)
+  //     }else{
+  //       const pathsArray = data?.map((path) => path.short_path);
+  //       setPathArray(pathsArray as String[]);
+  //     }
+  //   };
+  //   getLinks();
+  // }, [supabase]);
 
-  useEffect(() => {
-    setUrlExists(pathArray.includes(customPath));
-  }, [customPath, pathArray]);
+  // useEffect(() => {
+  //   setUrlExists(pathArray.includes(customPath));
+  // }, [customPath, pathArray]);
 
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -92,10 +92,10 @@ export default function UrlShortener() {
         setUrlTitle("");
         setError("");
         onOpen();
-      } else if (data.message.includes("duplicate key value ")) {
-        setError("pathname already exist, try another name");
-        setShortUrl("");
-        onOpen();
+      // } else if (data.message.includes("duplicate key value ")) {
+      //   setError("pathname already exist, try another name");
+      //   setShortUrl("");
+      //   onOpen();
       } else {
         setError(data.message || "An error occurred.");
         setShortUrl("");

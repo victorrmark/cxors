@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { FiChevronDown, FiLogOut } from "react-icons/fi";
 import { useTransition } from "react";
-import { logout } from "../login/actions";
+import { logout } from "@/app/actions/authActions";
 
 interface UserDropdownProps {
   email: string;

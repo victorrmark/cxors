@@ -1,6 +1,5 @@
 "use client"
 
-import React from 'react';
 import { Box, Text, HStack, Link, Icon } from '@chakra-ui/react';
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 

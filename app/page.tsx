@@ -7,20 +7,20 @@ import HowToUseSection from "../ui/howToUse";
 import FaqSection from "../ui/faq";
 import Footer from "../ui/footer"
 import {useEffect} from "react"
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 
 
 export default function Home() {
-  useEffect(() => {
-        const supabase = createClient();
+  // useEffect(() => {
+  //       const supabase = createClient();
     
-        supabase.auth.getUser().then(({ data }) => {
-          if (data.user) {
-            window.location.href = '/dashboard';
-          } 
-        });
-      }, []);
+  //       supabase.auth.getUser().then(({ data }) => {
+  //         if (data.user) {
+  //           window.location.href = '/dashboard';
+  //         } 
+  //       });
+  //     }, []);
   return (
     <>
       <Navbar />

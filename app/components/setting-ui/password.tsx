@@ -1,7 +1,7 @@
 "use client";
 import { useUserContext } from "../../context/userContext";
 import { useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 import {
   Box,
   Button,
@@ -9,7 +9,6 @@ import {
   FormControl,
   FormLabel,
   Stack,
-  Heading,
   Text,
   Flex,
   useToast,

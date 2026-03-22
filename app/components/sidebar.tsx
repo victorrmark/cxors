@@ -27,10 +27,10 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const sidebarItems = [
-    { label: "Home", icon: FiHome, href: "/dashboard/home", data: "home" },
-    { label: "Links", icon: FiLink, href: "/dashboard/links", data: "links" },
-    { label: "QR Code", icon: FiGrid, href: "/dashboard/qrcode", data: "qrcode" },
-    { label: "Settings", icon: FiSettings, href: "/dashboard/settings", data: "settings" },
+    { label: "Home", icon: FiHome, href: "/home", data: "home" },
+    { label: "Links", icon: FiLink, href: "/links", data: "links" },
+    { label: "QR Code", icon: FiGrid, href: "/qrcode", data: "qrcode" },
+    { label: "Settings", icon: FiSettings, href: "/settings", data: "settings" },
   ];
 
   return (

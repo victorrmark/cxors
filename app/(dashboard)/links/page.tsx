@@ -26,7 +26,7 @@ import {
   FaEnvelope,
   FaShareAlt,
 } from "react-icons/fa";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 type UrlData = {
@@ -63,6 +63,7 @@ const Links = () => {
 
         if (error) {
           setError(error.message);
+          console.log(error)
         } else {
           setUserData(data || []);
         }
@@ -165,7 +166,7 @@ const Links = () => {
                 size="md"
                 mb={2}
                 cursor="pointer"
-                onClick={() => router.push(`/dashboard/links/${item.id}`)}
+                onClick={() => router.push(`/links/${item.id}`)}
                 color="blue.500"
                 className="url-heading"
               >
