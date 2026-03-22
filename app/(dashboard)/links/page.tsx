@@ -46,7 +46,7 @@ const Links = () => {
   const toast = useToast();
   const router = useRouter();
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_REDIRECT_URL;
 
   useEffect(() => {
     const fetchData = async () => {

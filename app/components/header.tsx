@@ -1,9 +1,9 @@
 import { useUserContext } from "../context/userContext";
+import { useDateContext } from "../context/dateContext";
 import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import logo from "../../public/logo.png";
 import Image from "next/image";
-import { greet, date } from "../../utils/greetings";
 import UserDropdown from "./userDropdown";
 
 interface HeaderProps {
@@ -12,10 +12,10 @@ interface HeaderProps {
 
 export default function Header({ onOpenSidebar }: HeaderProps) {
   const { user } = useUserContext();
-  let greetings = greet();
+  const { greeting: greetings, date: currentDate } = useDateContext();
 
   const userEmail = user?.email as string;
-  const userName = user?.user_metadata?.display_name || ("User" as string);
+  const userName = user?.user_metadata.display_name || ("User" as string);
 
   return (
     <Flex
@@ -48,9 +48,9 @@ export default function Header({ onOpenSidebar }: HeaderProps) {
 
           <Box >
             <Text fontWeight="bold">
-              {greetings}
+              {greetings} {userName.split(" ")[0]}!
             </Text>
-            <Text>{date()}</Text>
+            <Text>{currentDate}</Text>
           </Box>
         </Box>
       </Box>

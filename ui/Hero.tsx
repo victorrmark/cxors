@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Flex, Text, Button, VStack, Heading } from '@chakra-ui/react';
 
 const HeroSection = () => {

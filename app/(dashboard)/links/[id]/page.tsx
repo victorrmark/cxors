@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import QRCode from "react-qr-code";
 import { Button } from "@chakra-ui/react";
 import { toPng } from 'html-to-image';
@@ -43,16 +44,17 @@ type UrlData = {
   last_location: string | null;
 };
 
-export default function LinkSlug({ params }: { params: { id: string } }) {
+export default function LinkSlug() {
   const [urlData, setUrlData] = useState<UrlData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const supabase = createClient();
   const router = useRouter();
   const qrRef = useRef<HTMLDivElement>(null);
-  const { id } = params;
+  const params = useParams();
+  const id = params.id as string;
   const toast = useToast();
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_REDIRECT_URL;
 
   useEffect(() => {
     const fetchUrlDetails = async () => {
@@ -124,7 +126,7 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
       <div>
         <Button
           variant="ghost"
-          onClick={() => router.push("/dashboard/links")}
+          onClick={() => router.push("/links")}
           mb="10px"
           leftIcon={<ChevronLeftIcon />}
         >
@@ -144,7 +146,7 @@ export default function LinkSlug({ params }: { params: { id: string } }) {
       <div>
         <Button
           variant="ghost"
-          onClick={() => router.push("/dashboard/links")}
+          onClick={() => router.push("/links")}
           mb="10px"
           leftIcon={<ChevronLeftIcon />}
         >

@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { createClient } from '@/lib/supabase/client'
-import { User } from '@supabase/supabase-js';
+import { createContext, useContext, useState } from "react";
+import { User } from "@supabase/supabase-js";
 
 interface UserContextType {
   user: User | null;
@@ -11,22 +10,17 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const supabase = createClient();
-
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) {
-        setUser(data.user);
-      } 
-    });
-  }, []);
-
+export const UserProvider = ({
+  children,
+  initialUser,
+}: {
+  children: React.ReactNode;
+  initialUser: User | null;
+}) => {
+  const [user, setUser] = useState<User | null>(initialUser);
 
   return (
-    <UserContext.Provider value={{ user, setUser}}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );
@@ -35,7 +29,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 export const useUserContext = () => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error('useUserContext must be used within a UserProvider');
+    throw new Error("useUserContext must be used within UserProvider");
   }
   return context;
 };

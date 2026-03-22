@@ -16,28 +16,27 @@ import {
 const ProfileSettings = () => {
   const { user } = useUserContext();
 
-  const [fetchedName, setFetchedName] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [fetchedName, setFetchedName] = useState<string>("");
+  const [displayName, setDisplayName] = useState<string>("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [nameMatch, setNameMatch] = useState(false);
 
   const supabase = createClient();
   const toast = useToast();
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) {
-        setFetchedName(data.user.user_metadata.display_name);
-        setDisplayName(data.user.user_metadata.display_name);
-        setEmail(data.user.email as string);
-      }
-    });
-  }, [supabase.auth]);
+    if (user) {
+      setFetchedName(user?.user_metadata.display_name ?? "");
+      setDisplayName(user?.user_metadata.display_name ?? "");
+      setEmail(user?.email as string);
+    }
+
+  }, [user]);
 
   useEffect(() => {
-    setIsLoading(displayName !== fetchedName);
+    setNameMatch(displayName !== fetchedName);
   }, [displayName, fetchedName]);
 
   const handleChangeName = async (e: React.FormEvent) => {
@@ -45,22 +44,30 @@ const ProfileSettings = () => {
 
     setIsSubmitting(true);
 
-    const { error: updateError } = await supabase.auth.updateUser({
-      data: { display_name: displayName },
-    });
+    try {
+      const { error: updateError } = await supabase.auth.updateUser({
+        data: { display_name: displayName },
+      });
 
-    if (updateError) {
-      setError("Error updating display name");
-      setIsSubmitting(false);
-    } else {
+      if (updateError) {
+        throw updateError;
+      }
+
       setError("");
       toast({
-        title: "Name Update.",
+        title: "Name Update",
         description: "Your display name has been updated!",
         status: "success",
         duration: 9000,
         isClosable: true,
       });
+      window.location.reload();
+
+    } catch (err) {
+      console.error(err);
+      setError("Error updating display name");
+
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -95,7 +102,7 @@ const ProfileSettings = () => {
               colorScheme="blue"
               bg="#006bb2"
               maxWidth="200px"
-              isDisabled={!isLoading}
+              isDisabled={!nameMatch || isSubmitting}
               data-id="change-name"
             >
               {isSubmitting ? "updating..." : "Update display name"}
@@ -103,7 +110,7 @@ const ProfileSettings = () => {
           </Stack>
         </form>
       </Box>
-      
+
       <Box boxShadow="md" width="100%" padding={2} mb="30px">
         <Text fontSize="md" fontWeight="bold" mb={2}>
           Email Address
