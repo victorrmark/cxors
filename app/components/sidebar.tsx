@@ -71,6 +71,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerContent bg="#006bb2">
           <DrawerHeader>
+            {/* <Box as="span" display={{ base: "block", md: "none" }}> */}
+            <Image src={logo} alt="Logo" width={80} style={{ height: 'auto' }} />
+            {/* </Box> */}
             <DrawerCloseButton color="white" />
           </DrawerHeader>
           <DrawerBody>

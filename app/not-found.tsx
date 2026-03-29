@@ -30,7 +30,7 @@ export default function NotFound() {
                 We promise this page existed once. <br/>Terrible coding broke it.
               </Text>
 
-              <Link href="/dashboard">Go back to Home</Link>
+              <Link href="/home">Go back to Home</Link>
             </Stack>
           </Box>
         </Stack>

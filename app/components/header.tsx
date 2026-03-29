@@ -54,9 +54,7 @@ export default function Header({ onOpenSidebar }: HeaderProps) {
           </Box>
         </Box>
       </Box>
-      <Box as="span" display={{ base: "block", md: "none" }}>
-        <Image src={logo} alt="Logo" width={80} style={{ height: 'auto' }} />
-      </Box>
+      
       <UserDropdown email={userEmail}  userName={userName}/>
     </Flex>
   );

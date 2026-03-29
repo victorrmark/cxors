@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import logo from "../public/logo.png";
+import { useUserContext } from "@/app/context/userContext";
 
 import React from "react";
 import {
@@ -24,6 +25,7 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { user } = useUserContext();
 
   return (
     <Box
@@ -37,7 +39,7 @@ const Navbar = () => {
     >
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <Flex alignItems="center">
-          <Image src={logo} alt="Logo" width={100} style={{ height: 'auto' }}  />
+          <Image src={logo} alt="Logo" width={100} style={{ height: 'auto' }} />
         </Flex>
 
         <Spacer />
@@ -69,26 +71,49 @@ const Navbar = () => {
           <Link href="#faq" fontSize="md" fontWeight="medium" color="#006bb2">
             FAQ
           </Link>
-          <Link href="/login">
+
+          {user ? (
             <Button
-              variant="link"
-              fontSize="md"
-              fontWeight="medium"
-              color="#006bb2"
+              as="a"
+              href="/home"
+              bg="#006bb2"
+              color="white"
+              _hover={{ bg: "#005a93" }}
+              data-id="dashboard"
             >
-              Log In
+              Dashboard
             </Button>
-          </Link>
-          <Button
-            as="a"
-            href="/signup"
-            bg="#006bb2"
-            color="white"
-            _hover={{ bg: "#005a93" }}
-            data-id="signup"
-          >
-            Sign Up
-          </Button>
+          ) :
+            (
+              <Flex
+                alignItems="center"
+                gap={4}
+              >
+                <Link href="/login">
+                  <Button
+                    variant="link"
+                    fontSize="md"
+                    fontWeight="medium"
+                    color="#006bb2"
+                  >
+                    Log In
+                  </Button>
+                </Link>
+
+                <Button
+                  as="a"
+                  href="/signup"
+                  bg="#006bb2"
+                  color="white"
+                  _hover={{ bg: "#005a93" }}
+                  data-id="signup"
+                >
+                  Sign Up
+                </Button>
+              </Flex>
+            )}
+
+
         </Flex>
       </Flex>
 
@@ -124,27 +149,44 @@ const Navbar = () => {
               >
                 FAQ
               </Link>
-              <Link href="/login" w="full">
+
+              {user ? (
                 <Button
+                  as="a"
+                  href="/signup"
+                  bg="#006bb2"
+                  color="white"
+                  _hover={{ bg: "#005a93" }}
                   w="full"
-                  variant="link"
-                  fontSize="md"
-                  fontWeight="medium"
-                  color="#006bb2"
                 >
-                  Log In
+                  Sign Up
                 </Button>
-              </Link>
-              <Button
-                as="a"
-                href="/signup"
-                bg="#006bb2"
-                color="white"
-                _hover={{ bg: "#005a93" }}
-                w="full"
-              >
-                Sign Up
-              </Button>
+              ) :
+                (<VStack alignItems="center" spacing={4}>
+                  <Link href="/login" w="full">
+                    <Button
+                      w="full"
+                      variant="link"
+                      fontSize="md"
+                      fontWeight="medium"
+                      color="#006bb2"
+                    >
+                      Log In
+                    </Button>
+                  </Link>
+                  <Button
+                    as="a"
+                    href="/signup"
+                    bg="#006bb2"
+                    color="white"
+                    _hover={{ bg: "#005a93" }}
+                    w="full"
+                  >
+                    Sign Up
+                  </Button>
+                </VStack>)
+              }
+
             </VStack>
           </DrawerBody>
         </DrawerContent>

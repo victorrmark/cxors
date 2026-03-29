@@ -19,7 +19,7 @@ interface UserDropdownProps {
 }
 
 export default function UserDropdown({ email, userName }: UserDropdownProps) {
-  const initial = email?.charAt(0).toUpperCase();
+  const initial = userName?.charAt(0).toUpperCase();
   const [isPending, startTransition] = useTransition();
 
   const handleLogout = () => {
@@ -38,8 +38,8 @@ export default function UserDropdown({ email, userName }: UserDropdownProps) {
               borderRadius="full"
               bg="blue.600"
               color="white"
-              px={3}
-              py={1}
+              px={4}
+              py={2}
               fontWeight="bold"
               mr={2}
             >
