@@ -158,7 +158,7 @@ const SignupPage = () => {
 
             <form onSubmit={handleSubmit}>
               <FormControl>
-                <FormLabel htmlFor="name">Email</FormLabel>
+                <FormLabel htmlFor="name">Full Name</FormLabel>
                 <Input
                   id="name"
                   type="text"

@@ -6,16 +6,17 @@ import { FcGoogle } from "react-icons/fc";
 
 import {
   Box,
-  Button,
   Heading,
   Text,
   VStack,
   HStack,
   Link,
-  Icon,
+  useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +27,24 @@ const Login = () => {
 
   const router = useRouter();
   const supabase = createClient();
+  const searchParams = useSearchParams();
+  const toast = useToast();
+
+  useEffect(() => {
+    const code = searchParams.get("code");
+    if (code) {
+      toast({
+        title: "Account verified!",
+        description: "Your account has been successfully verified. Please log in.",
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      });
+      supabase.auth.exchangeCodeForSession(code).then(() => {
+        supabase.auth.signOut();
+      });
+    }
+  }, [searchParams]);
 
   // useEffect(() => {
   //   const supabase = createClient();
@@ -73,7 +92,7 @@ const Login = () => {
         },
       },
     });
-    if(error) {
+    if (error) {
       setError(error.message);
     }
   };
