@@ -22,6 +22,8 @@ export default function UserDropdown({ email, userName }: UserDropdownProps) {
   const initial = userName?.charAt(0).toUpperCase();
   const [isPending, startTransition] = useTransition();
 
+  console.log(initial)
+
   const handleLogout = () => {
     startTransition(async () => {
       await logout();

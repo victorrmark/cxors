@@ -81,18 +81,19 @@ const Login = () => {
     });
   };
 
-  const loginWithGoogle = async () => {
+    const loginWithGoogle = async () => {
     // event.preventDefault();
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${`${process.env.BASE_URL}/home`}`,
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,
         queryParams: {
           prompt: "consent",
         },
       },
     });
-    if (error) {
+
+    if(error) {
       setError(error.message);
     }
   };
