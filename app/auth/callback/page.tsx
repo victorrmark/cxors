@@ -3,6 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import Image from "next/image";
+import Check from "@/public/check.png";
+import { Heading } from "@chakra-ui/react";
 
 export default function AuthCallback() {
   const router = useRouter();
@@ -18,5 +21,19 @@ export default function AuthCallback() {
     });
   }, []);
 
-  return <p>Signing you in...</p>;
+  return (
+    <div className="succes-div">
+      <Heading as="h3" size="lg" color="#000">
+        Success
+      </Heading>
+      <p>Logging you in...</p>
+      <Image
+        src={Check}
+        alt="login success check image"
+        width={170}
+        height={50}
+        className="success-img"
+      />
+    </div>
+  );
 }

@@ -28,8 +28,8 @@ export default async function RootLayout({
 }>) {
 
   const { greeting, date } = getGreetingAndDate();
-  const supabase = await createClient();
 
+  const supabase = await createClient();
 
   const {
     data: { user },

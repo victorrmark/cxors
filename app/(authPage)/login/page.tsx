@@ -37,7 +37,7 @@ const Login = () => {
         title: "Account verified!",
         description: "Your account has been successfully verified. Please log in.",
         status: "info",
-        duration: 5000,
+        duration: 9000,
         isClosable: true,
       });
       supabase.auth.exchangeCodeForSession(code).then(() => {

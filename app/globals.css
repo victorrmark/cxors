@@ -126,3 +126,16 @@ form {
   overflow-y: scroll;
   padding: 1rem;
 }
+
+.success-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.success-img{
+  margin-top: 4px;
+  animation: pulse 2s infinite;
+}
