@@ -14,6 +14,8 @@ export default function Header({ onOpenSidebar }: HeaderProps) {
   const { user } = useUserContext();
   const { greeting: greetings, date: currentDate } = useDateContext();
 
+  console.log(user)
+
   const userEmail = user?.email as string;
   const userName = user?.user_metadata.display_name || user?.user_metadata.full_name || ("User" as string);
 
@@ -56,7 +58,7 @@ export default function Header({ onOpenSidebar }: HeaderProps) {
         </Box>
       </Box>
       
-      <UserDropdown email={userEmail}  userName={userName}/>
+      <UserDropdown email={userEmail}  userName={userName} avatar={user?.user_metadata.avatar_url} />
     </Flex>
   );
 }

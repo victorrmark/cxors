@@ -139,3 +139,22 @@ form {
   margin-top: 4px;
   animation: pulse 2s infinite;
 }
+
+.avatar{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+
+}
+
+.avatar-placeholder{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}

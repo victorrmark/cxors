@@ -12,16 +12,21 @@ import {
 import { FiChevronDown, FiLogOut } from "react-icons/fi";
 import { useTransition } from "react";
 import { logout } from "@/app/actions/authActions";
+import Image from "next/image";
 
 interface UserDropdownProps {
   email: string;
   userName: string;
+  avatar?: string | null;
 }
 
-export default function UserDropdown({ email, userName }: UserDropdownProps) {
+export default function UserDropdown({
+  email,
+  userName,
+  avatar,
+}: UserDropdownProps) {
   const initial = userName?.charAt(0).toUpperCase();
   const [isPending, startTransition] = useTransition();
-
 
   const handleLogout = () => {
     startTransition(async () => {
@@ -34,18 +39,30 @@ export default function UserDropdown({ email, userName }: UserDropdownProps) {
       <Menu>
         <MenuButton as={Box} data-id="open-logout">
           <Flex alignItems="center" gap="2">
-            <Box
-              as="span"
-              borderRadius="full"
-              bg="blue.600"
-              color="white"
-              px={4}
-              py={2}
+            {avatar ? (
+              <Image
+                src={avatar}
+                alt="User Avatar"
+                width={50}
+                height={50}
+                className="avatar"
+              />
+            ) : (
+              <Box
+                as="span"
+                borderRadius="full"
+                bg="blue.600"
+                color="white"
+                // px={4}
+              // py={2}
               fontWeight="bold"
               mr={2}
+              className="avatar-placeholder"
             >
               {initial}
-            </Box>
+            </Box>)}
+
+            
             <Box as="span" display={{ base: "none", md: "block" }}>
               <Box display="flex" alignItems="center" gap="5px">
                 <Box as="span">
