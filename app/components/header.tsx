@@ -14,7 +14,6 @@ export default function Header({ onOpenSidebar }: HeaderProps) {
   const { user } = useUserContext();
   const { greeting: greetings, date: currentDate } = useDateContext();
 
-  console.log(user)
 
   const userEmail = user?.email as string;
   const userName = user?.user_metadata.display_name || user?.user_metadata.full_name || ("User" as string);

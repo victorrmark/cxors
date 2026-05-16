@@ -22,8 +22,8 @@ export default function AuthCallback() {
   }, []);
 
   return (
-    <div className="succes-div">
-      <Heading as="h3" size="lg" color="#000">
+    <div className="success-div">
+      <Heading as="h1" size="2xl" color="#000" mb={4}>
         Success
       </Heading>
       <p>Logging you in...</p>

@@ -1,6 +1,6 @@
 "use client";
 
-import { createClient } from "../../../lib/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import { VStack, Heading, Text, Button, useToast, Box, HStack } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 
 
 const ForgotPassword = () => {
-  const [usersEmails, setUsersEmails] = useState<string[]>([]);
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,40 +16,22 @@ const ForgotPassword = () => {
   const toast = useToast();
   const router = useRouter()
 
-  useEffect(() => {
-    const fetchEmails = async () => {
-      const { error, data } = await supabase.from("users").select("email");
-
-      if (error) {
-        console.log(error);
-      } else {
-        const emailArray = data.map((user) => user.email);
-        setUsersEmails(emailArray);
-      }
-    };
-
-    fetchEmails();
-  }, [supabase]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setIsLoading(true);
 
-    if (!usersEmails.includes(email)) {
-      setError(true);
-      setIsLoading(false);
-      return;
-    }
 
     const { error } = await supabase
       .auth
       .resetPasswordForEmail(email, {
-        redirectTo: `https://cxors.vercel.app/resetpassword`
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/resetpassword`
       });
 
     if (error) {
       setIsLoading(false);
+      console.log(error)
       toast({
         title: "Reset Error.",
         description: "Error sending reset link",
@@ -106,11 +87,6 @@ const ForgotPassword = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        {error && (
-          <Text mt="5px" color="red" data-id="err">
-            We cannot find your email
-          </Text>
-        )}
 
         <button
           className="button"

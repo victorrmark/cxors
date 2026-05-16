@@ -12,7 +12,7 @@ import {
   Flex,
   useToast,
 } from "@chakra-ui/react";
-import { createClient } from "../../utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 const ResetPasswordForm = () => {
@@ -43,6 +43,7 @@ const ResetPasswordForm = () => {
         duration: 9000,
         isClosable: true,
       });
+      supabase.auth.signOut();
       router.push("/login");
     }
 
@@ -94,11 +95,11 @@ const ResetPasswordForm = () => {
               />
             </FormControl>
 
-            {error && (
+            {/* {error && (
               <Text textAlign="center" color="red.500">
                 {error}
               </Text>
-            )}
+            )} */}
 
             <Button type="submit" colorScheme="blue" bg="#006bb2">
               Reset Password

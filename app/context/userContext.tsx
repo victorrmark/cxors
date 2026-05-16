@@ -25,12 +25,15 @@ export const UserProvider = ({
   const router = useRouter();
 
   useEffect(() => {
+    setUser(initialUser);
+  }, [initialUser]);
+
+  useEffect(() => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
 
-      router.refresh();
     });
 
     return () => subscription.unsubscribe();

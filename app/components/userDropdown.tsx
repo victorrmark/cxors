@@ -8,6 +8,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useToast
 } from "@chakra-ui/react";
 import { FiChevronDown, FiLogOut } from "react-icons/fi";
 import { useTransition } from "react";
@@ -27,10 +28,20 @@ export default function UserDropdown({
 }: UserDropdownProps) {
   const initial = userName?.charAt(0).toUpperCase();
   const [isPending, startTransition] = useTransition();
+  const toast = useToast();
 
   const handleLogout = () => {
     startTransition(async () => {
-      await logout();
+      const error = await logout();
+      if (error) {
+        toast({
+          title: "Error",
+          description: "Failed to logout.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     });
   };
 
