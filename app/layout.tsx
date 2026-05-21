@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 // import Head from 'next/head';
+import { UserProvider } from "./context/userContext";
+import { createClient } from "@/lib/supabase/server";
 import { Providers } from "./providers";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,7 +24,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <html lang="en">
@@ -32,11 +37,9 @@ export default async function RootLayout({
       </Head> */}
       <body className={poppins.className}>
         <Providers>
-          {/* <UserProvider initialUser={user}> */}
-            {/* <DateProvider value={{ greeting, date }}> */}
-              {children}
-            {/* </DateProvider> */}
-          {/* </UserProvider> */}
+          <UserProvider initialUser={user}>
+            {children}
+          </UserProvider>
         </Providers>
       </body>
     </html>

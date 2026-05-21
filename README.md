@@ -1,21 +1,136 @@
-## CXORS - (A URL Shortening App)
+# Cxors — Modern URL Shortener & Link Management Platform
 
-### Description
+## Overview
 
-Welcome to cxors project! Scissor is a simple tool that makes URLs as short as possible. This app was built using TypeScript, Next.js, Supabase for the backend, and Chakra UI for the frontend. 
+**Cxors** is a modern full-stack URL shortening and link management application built with Next.js, Supabase, and Chakra UI.
 
-### Features
+The platform allows users to create shortened URLs, generate QR codes, manage links from a personalized dashboard, and track link performance through analytics.
 
-- Cxors allows users to shorten long URLs, 
-- Users can choose their custom domain name and customize the URL to reflect their brand or content. 
-- Cxors also allows users to generate QR codes for the shortened URLs. 
-- Users can download and use the QR code image.
-- Cxors provides basic analytics that allows users to track the performance of their shortened URLs. Users can see how many clicks their shortened URL has received and where the clicks are coming from. 
+Designed with performance, simplicity, and scalability in mind, Cxors provides a clean user experience while handling authentication, link management, and analytics in real time.
 
-### Contributing
-We welcome any and all contributions! Here are some ways you can get started:
+---
 
-- Report bugs: If you encounter any bugs, please let us know. Open up an issue and let us know the problem.
-- Contribute code: Fork and clone the repo, add your contributions (code or documentation), commit and push, wait for pull request to be merged.
-- Suggestions: If you don't want to code but have some awesome ideas, open up an issue explaining some updates or imporvements you would like to see!
-- Documentation: If you see the need for some additional documentation, feel free to add some!
+## Features
+
+### URL Shortening
+- Convert long URLs into short, shareable links instantly
+- Fast and user-friendly shortening workflow
+- Copy shortened links with one click
+
+### Custom Aliases
+- Create personalized short links
+- Customize URLs to match brands, campaigns, or content
+
+Example: cxors.vercel.app/myportfolio
+
+---
+
+### QR Code Generation
+- Automatically generate QR codes for shortened links
+- Download QR codes as images
+- Share links easily across mobile and offline platforms
+
+---
+
+### Authentication System
+- Secure authentication powered by Supabase
+- Email/password authentication
+- Google OAuth login
+- Protected dashboard routes
+- Persistent user sessions
+
+---
+
+### User Dashboard
+- Manage all created links in one place
+- View shortened URLs and original URLs
+- Access analytics and engagement data
+- Personalized user experience
+
+---
+
+### Analytics
+Track the performance of shortened URLs with:
+- Total click counts
+- Link activity monitoring
+
+---
+
+## Tech Stack
+
+### Frontend
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Chakra UI
+
+### Backend & Database
+- Supabase
+- PostgreSQL
+- Supabase Authentication
+- Supabase Storage
+
+### Deployment
+- Vercel
+
+---
+
+## Getting Started
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/your-username/cxors.git
+cd cxors
+```
+### Environmental Variables
+create a .env.local file
+
+```env
+
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_REDIRECT_URL=your redirect url
+
+```
+
+### Install dependencies
+```bash
+npm install
+```
+### run development server
+```bash
+npm run dev
+```
+
+## Project Goals
+Cxors was built to:
+
+- Practice full-stack application development
+- Explore authentication and database management with Supabase
+- Build scalable modern web applications using Next.js App Router
+- Improve UI/UX and state management patterns
+
+## Future Improvements
+- Advanced analytics dashboard
+- Link expiration support
+- Custom domains
+- Team/shared workspaces
+- API access for developers
+- Rate limiting and abuse protection
+- Password-protected links
+- Link folders and organization
+
+## Contributing
+
+Contributions, suggestions, and feedback are welcome.
+
+### Steps:
+- Fork the repository
+- Create a feature branch
+- Commit changes
+- Push branch
+- Open a pull request

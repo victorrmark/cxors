@@ -1,4 +1,4 @@
-import logo from "../../public/logo.png";
+import logo from "../../public/logo-small.png";
 import {
   Box,
   Drawer,
