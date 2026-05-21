@@ -8,7 +8,7 @@ import {
   MenuItem,
   MenuList,
   Text,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import { FiChevronDown, FiLogOut } from "react-icons/fi";
 import { useTransition } from "react";
@@ -65,15 +65,15 @@ export default function UserDropdown({
                 bg="blue.600"
                 color="white"
                 // px={4}
-              // py={2}
-              fontWeight="bold"
-              mr={2}
-              className="avatar-placeholder"
-            >
-              {initial}
-            </Box>)}
+                // py={2}
+                fontWeight="bold"
+                mr={2}
+                className="avatar-placeholder"
+              >
+                {initial}
+              </Box>
+            )}
 
-            
             <Box as="span" display={{ base: "none", md: "block" }}>
               <Box display="flex" alignItems="center" gap="5px">
                 <Box as="span">
@@ -88,6 +88,14 @@ export default function UserDropdown({
           </Flex>
         </MenuButton>
         <MenuList>
+          <Box as="span" display={{ base: "block", md: "none" }}>
+            <Box display="flex" alignItems="center" gap="5px" p={3} pt={2}>
+              <Box as="span">
+                <Text fontWeight="bold">{userName}</Text>
+                <Text>{email}</Text>
+              </Box>
+            </Box>
+          </Box>
           <MenuItem
             icon={<FiLogOut />}
             onClick={handleLogout}
